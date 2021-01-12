@@ -13,7 +13,7 @@ export const useContacts = () => {
   const fetchedData = async () => {
     try {
       setIsLoading(true);
-      const resp = await axios.get("https://randomuser.me/api/?results=100");
+      const resp = await axios.get("https://randomuser.me/api/?results=10");
       const { data } = resp;
 
       if (data.error) {

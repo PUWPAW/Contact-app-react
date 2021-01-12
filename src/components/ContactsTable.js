@@ -11,10 +11,15 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import { Typography } from "@material-ui/core";
+import { NATIONALITY_HUMAN_NAME } from "../constants/nationality";
+import CopyToClipboard from "./CopyToClipboard";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
+  },
+  location: {
+    maxWidth: 180,
   },
 });
 
@@ -23,7 +28,7 @@ const ContactsTable = ({ data }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} size="small" aria-label="a dense table">
+      <Table className={classes.table} size="small" aria-label="contacts table">
         <TableHead>
           <TableRow>
             <TableCell>Avatar</TableCell>
@@ -32,7 +37,7 @@ const ContactsTable = ({ data }) => {
             <TableCell align="left">Email</TableCell>
             <TableCell align="left">Phone</TableCell>
             <TableCell align="left">Location</TableCell>
-            <TableCell align="left">Nationality</TableCell>
+            <TableCell align="right">Nationality</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -56,12 +61,12 @@ const ContactsTable = ({ data }) => {
                 <Typography variant="body2">{contact.dob.age} years</Typography>
               </TableCell>
               <TableCell align="left">
-                <Typography variant="body2">{contact.email}</Typography>
+                <CopyToClipboard text={contact.email} />
               </TableCell>
               <TableCell align="left">
-                <Typography variant="body2">{contact.phone}</Typography>
+                <CopyToClipboard text={contact.phone} />
               </TableCell>
-              <TableCell align="left">
+              <TableCell align="left" className={classes.location}>
                 <Typography variant="body2">
                   /{contact.location.country}/
                 </Typography>
@@ -73,7 +78,7 @@ const ContactsTable = ({ data }) => {
               </TableCell>
               <TableCell align="right">
                 <Typography variant="body2">
-                  {contact.location.country}
+                  {NATIONALITY_HUMAN_NAME[contact.nat]}
                 </Typography>
               </TableCell>
             </TableRow>
